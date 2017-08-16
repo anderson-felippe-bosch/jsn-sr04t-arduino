@@ -30,7 +30,6 @@
 #define TRIGPIN_SENSOR4     9     // Pin to send trigger pulse
 //---- Rates ----//
 #define CALIBRATION_RATE    100   // Calibration rate to calculate average
-#define DETECTION_RATE      0.3   // 30% variation to detect movement
 
 //Initialize all sensors
 void init_ultrasound_sensors(void);

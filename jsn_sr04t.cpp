@@ -18,14 +18,6 @@ static uint16_t calibrated_average_1 = 0;
 static uint16_t calibrated_average_2 = 0;
 static uint16_t calibrated_average_3 = 0;
 static uint16_t calibrated_average_4 = 0;
-static float upper_detection_trigger_1 = 0;
-static float lower_detection_trigger_1 = 0;
-static float upper_detection_trigger_2 = 0;
-static float lower_detection_trigger_2 = 0; 
-static float upper_detection_trigger_3 = 0;
-static float lower_detection_trigger_3 = 0; 
-static float upper_detection_trigger_4 = 0;
-static float lower_detection_trigger_4 = 0;
 static uint16_t distance[4];
 
 // Private prototypes
@@ -36,7 +28,7 @@ uint8_t get_trigger_pin(uint8_t);
 
 void init_ultrasound_sensors()
 {
-	Serial.println("Initializing sensors...\n");
+	Serial.println("Initializing sensors...");
 	pinMode(ECHOPIN_SENSOR1, INPUT_PULLUP);
 	pinMode(TRIGPIN_SENSOR1, OUTPUT);
 	pinMode(ECHOPIN_SENSOR2, INPUT_PULLUP);
@@ -47,7 +39,7 @@ void init_ultrasound_sensors()
 	pinMode(TRIGPIN_SENSOR4, OUTPUT);
 	//Small delay before sensor hardware initialization
 	delay(20);
-	Serial.println("Initialization complete.\n");
+	Serial.println("Sensors initialized.");
 }
 
 
@@ -151,8 +143,6 @@ void calibrate_ultrasound_sensor(uint8_t sensor_number)
 				Serial.println("\tDouble check sensor pins connections.");
 				return;
 			}
-			upper_detection_trigger_1 = (float)calibrated_average_1 * (1.0 + DETECTION_RATE);
-			lower_detection_trigger_1 = (float)calibrated_average_1 * (1.0 - DETECTION_RATE);
 			Serial.print("Calibration done to sensor 1: ");
 			Serial.print(calibrated_average_1);
 			Serial.println(" cm");
@@ -168,8 +158,6 @@ void calibrate_ultrasound_sensor(uint8_t sensor_number)
 				Serial.println("\tDouble check sensor pins connections.");
 				return;
 			}
-			upper_detection_trigger_2 = (float)calibrated_average_2 * (1.0 + DETECTION_RATE);
-			lower_detection_trigger_2 = (float)calibrated_average_2 * (1.0 - DETECTION_RATE);
 			Serial.print("Calibration done to sensor 2: ");
 			Serial.print(calibrated_average_2);
 			Serial.println(" cm");
@@ -185,8 +173,6 @@ void calibrate_ultrasound_sensor(uint8_t sensor_number)
 				Serial.println("\tDouble check sensor pins connections.");
 				return;
 			}
-			upper_detection_trigger_3 = (float)calibrated_average_3 * (1.0 + DETECTION_RATE);
-			lower_detection_trigger_3 = (float)calibrated_average_3 * (1.0 - DETECTION_RATE);
 			Serial.print("Calibration done to sensor 3: ");
 			Serial.print(calibrated_average_3);
 			Serial.println(" cm");
@@ -202,8 +188,6 @@ void calibrate_ultrasound_sensor(uint8_t sensor_number)
 				Serial.println("\tDouble check sensor pins connections.");
 				return;
 			}
-			upper_detection_trigger_4 = (float)calibrated_average_4 * (1.0 + DETECTION_RATE);
-			lower_detection_trigger_4 = (float)calibrated_average_4 * (1.0 - DETECTION_RATE);
 			Serial.print("Calibration done to sensor 4: ");
 			Serial.print(calibrated_average_4);
 			Serial.println(" cm");
@@ -297,10 +281,3 @@ int16_t get_distance(uint8_t sensor_number)
 	delay(50);// Wait 50mS before next ranging
 	return distance[sensor_number - 1];
 }
-
-
-
-
-
-
-
